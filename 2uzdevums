@@ -1,3 +1,15 @@
+1)
+
+temperatura = float(input("Ievadiet savu temperatūru: "))
+
+
+if temperatura < 35:
+    print("Nav par aukstu")
+elif 35 <= temperatura <= 37:
+    print("Viss kārtībā")
+else:
+    print("Iespējams drudzis")
+
 2) salary = int(input("What's your salary?"))
 seniority = int(input("How many years have you worked for your company?"))
 bonus = int(salary * 0.15 * (seniority-2))
