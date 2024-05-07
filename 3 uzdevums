@@ -1,14 +1,22 @@
 2) uzdevums 
 while True:
-    augstums = int(input("Ievadiet eglītes augstumu: "))
-    
-    if augstums > 40:
-        print("Eglītes augstums nevar būt lielāks par 40!")
-    else:
-        for i in range(augstums):
-            print(" " * (augstums - i - 1), end="")
-            print("*" * (2 * i + 1))
-        break 
+    try:
+        augstums = int(input("Ievadiet eglītes augstumu: "))
+        
+        if augstums <= 0:
+            print("Augstumam jābūt pozitīvam skaitlim!")
+            continue
+        
+        if augstums > 40:
+            print("Eglītes augstums nevar būt lielāks par 40!")
+        else:
+            for i in range(augstums):
+                print(" " * (augstums - i - 1), end="")
+                print("*" * (2 * i + 1))
+            break 
+    except ValueError:
+        print("Nepareiza ievade. Lūdzu, ievadiet veselu skaitli.")
+
 
 
 1) uzdevums 
