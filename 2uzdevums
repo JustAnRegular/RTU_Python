@@ -1,0 +1,46 @@
+2) salary = int(input("What's your salary?"))
+seniority = int(input("How many years have you worked for your company?"))
+bonus = int(salary * 0.15 * (seniority-2))
+
+
+# Izvadiet bonusu.
+
+if seniority <= 2:
+     print("To get bonus you need work more than 2 years")
+else:
+    print("Your bonus this year is ", bonus)
+
+3) 
+# Lūdzam lietotājam ievadīt trīs skaitļus
+skaitlis1 = float(input("Ievadiet pirmo skaitli: "))
+skaitlis2 = float(input("Ievadiet otro skaitli: "))
+skaitlis3 = float(input("Ievadiet trešo skaitli: "))
+
+# Atgriežam skaitļus sakārtotā secībā, izmantojot if, elif, else
+if skaitlis1 <= skaitlis2 and skaitlis1 <= skaitlis3:
+    mazakais = skaitlis1
+    if skaitlis2 <= skaitlis3:
+        vidus = skaitlis2
+        lielakais = skaitlis3
+    else:
+        vidus = skaitlis3
+        lielakais = skaitlis2
+elif skaitlis2 <= skaitlis1 and skaitlis2 <= skaitlis3:
+    mazakais = skaitlis2
+    if skaitlis1 <= skaitlis3:
+        vidus = skaitlis1
+        lielakais = skaitlis3
+    else:
+        vidus = skaitlis3
+        lielakais = skaitlis1
+else:
+    mazakais = skaitlis3
+    if skaitlis1 <= skaitlis2:
+        vidus = skaitlis1
+        lielakais = skaitlis2
+    else:
+        vidus = skaitlis2
+        lielakais = skaitlis1
+
+# Izvadīsim sakārtotos skaitļus
+print("Skaitļi sakārtotā secībā:", mazakais, vidus, lielakais)
