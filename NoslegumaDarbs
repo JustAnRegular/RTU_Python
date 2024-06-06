@@ -1,7 +1,9 @@
 # Pa pamatu tika paņemta šī ideja, kur cilvēka darba intervija palūdza uztaisit spēle un viņam tas nesanāca
 # https://codereview.stackexchange.com/questions/267908/a-simple-minesweeper-in-python
 # Tāpēc bija interesanti to izdarīt
-# kā savienot noteikumus vienā smuki neizdomāju 
+# kā savienot noteikumus vienā smuki neizdomāju
+# vispār gribējas kaut ko ar dokumentiem, bet IT daļa neiedeva pagaidām atļaujas un Jypiter un ta pati problēma ar faila atveršanu palika
+# tāpēc paņēmu pirmo ideju - spēli kuru var testēt uzreiz terminālā
 import random
 
 def display_rules():
