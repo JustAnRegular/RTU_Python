@@ -1,0 +1,82 @@
+# Pa pamatu tika paņemta šī ideja, kur cilvēka darba intervija palūdza uztaisit spēle un viņam tas nesanāca
+# https://codereview.stackexchange.com/questions/267908/a-simple-minesweeper-in-python
+# Tāpēc bija interesanti to izdarīt
+# kā savienot noteikumus vienā smuki neizdomāju 
+import random
+
+def display_rules():
+    print("Laipni lūdzam spēlēt Minesveiperu!")
+    print("Noteikumi:")
+    print("Spēles laukums ir režģa veidā, kurā ir slēptas bumbas.")
+    print("Dažādas šūnas satur bumbas, bet citas ciparus, kas norāda, cik sprādzienbīstamas kaudzes ir blakus šai šūnai.")
+    print("Spēles mērķis ir atklāt visas šūnas, kurās nav bumbas.")
+    print("Ievadiet rindas un kolonnas numurus, lai atklātu šūnu.")
+    print("Ja atklājat šūnu ar bumbu, jūs zaudējat spēli.")
+    print("Ja atklājat visas šūnas bez bumbas, jūs uzvarat spēli.")
+    print("Spēle beidzas, kad atversiet šūnu ar bumbu vai veiksmīgi atklājat visas šūnas bez tām.")
+    print("Veiksmi!\n")
+
+def create_board(size, num_mines):
+    board = [[' ' for _ in range(size)] for _ in range(size)]
+    mines = set()
+
+    while len(mines) < num_mines:
+        x, y = random.randint(0, size - 1), random.randint(0, size - 1)
+        if (x, y) not in mines:
+            mines.add((x, y))
+            board[x][y] = 'B'
+    
+    for x, y in mines:
+        for i in range(max(0, x-1), min(size, x+2)):
+            for j in range(max(0, y-1), min(size, y+2)):
+                if board[i][j] != 'M':
+                    if board[i][j] == ' ':
+                        board[i][j] = '1'
+                    else:
+                        board[i][j] = str(int(board[i][j]) + 1)
+    return board, mines
+
+def display_board(board, revealed):
+    size = len(board)
+    print("   " + " ".join(str(i) for i in range(size)))
+    print("  +" + "-+" * size)
+    for i in range(size):
+        row = []
+        for j in range(size):
+            if revealed[i][j]:
+                row.append(board[i][j])
+            else:
+                row.append(" ")
+        print(f"{i} |" + "|".join(row) + "|")
+    print("  +" + "-+" * size)
+
+def reveal(board, revealed, x, y):
+    if revealed[x][y]:
+        return
+    revealed[x][y] = True
+    if board[x][y] == ' ':
+        for i in range(max(0, x-1), min(len(board), x+2)):
+            for j in range(max(0, y-1), min(len(board), y+2)):
+                if not revealed[i][j]:
+                    reveal(board, revealed, i, j)
+
+def play_minesweeper(size=8, num_mines=10):
+    display_rules()
+    board, mines = create_board(size, num_mines)
+    revealed = [[False for _ in range(size)] for _ in range(size)]
+    while True:
+        display_board(board, revealed)
+        x = int(input("Ievadiet rindas numuru: "))
+        y = int(input("Ievadiet kolonnas numuru: "))
+        if (x, y) in mines:
+            print("Spēle beigusies! Jūs uzgājāt bumbai.")
+            for mx, my in mines:
+                revealed[mx][my] = True
+            display_board(board, revealed)
+            break
+        reveal(board, revealed, x, y)
+        if all(revealed[i][j] or (i, j) in mines for i in range(size) for j in range(size)):
+            print("Apsveicu! Jūs atradāt visas bumbas.")
+            break
+
+play_minesweeper()
